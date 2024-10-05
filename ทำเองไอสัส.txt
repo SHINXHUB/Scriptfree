@@ -4745,25 +4745,6 @@ spawn(function()
     end)
 end)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if World3 then
 Farm:Toggle("ออโต้ ดาบคู่", false, function(value)
     Auto_Cursed_Dual_Katana = value
