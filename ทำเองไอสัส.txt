@@ -4356,7 +4356,6 @@ spawn(function()
     end)
 end)
 -----------------------------------------------------------------------------------------------------------------------------Sub Farm Tab
-if World2 then
 Farm:Toggle("ออโต้ ตีโรงงาน", false, function(value)
     _G.AutoFactory = value
     StopTween(_G.AutoFactory)
@@ -4385,7 +4384,6 @@ spawn(function()
     end
 end)
 
-if World3 then
 Farm:Toggle("ออโต้ โจรสลัด บุกเกาะกลาง", false, function(value)
     _G.RaidPirate = value
     StopTween(_G.RaidPirate)
@@ -4425,7 +4423,6 @@ spawn(function()
     end
 end)
 
-if World2 then
 Farm:Toggle("ออโต้ ตีโดฟา", false, function(value)
     _G.AutoFarmSwanGlasses = value
     StopTween(_G.AutoFarmSwanGlasses)
@@ -4470,7 +4467,6 @@ spawn(function()
     end)
 end)
 
-if World3 then
 Farm:Toggle("ออโต้ ฮาคิสีรุ้ง", false, function(value)
     _G.Auto_Rainbow_Haki = value
     StopTween(_G.Auto_Rainbow_Haki)
@@ -4597,7 +4593,6 @@ spawn(function()
     end)
 end)
 
-if World2 then
 Farm:Toggle("ออโต้ เผ่า V2", false, function(value)
     _G.Auto_EvoRace = value
     StopTween(_G.Auto_EvoRace)
@@ -4652,7 +4647,6 @@ spawn(function()
     end)
 end)
 
-if World2 then
 Farm:Toggle("ออโต้ เควส โลก 3 ( เบต้า )", false, function(value)
     _G.AutoBartilo = value
 end)
@@ -4745,8 +4739,7 @@ spawn(function()
     end)
 end)
 
-if World3 then
-Farm:Toggle("ออโต้ ดาบคู่", false, function(value)
+Farm:Toggle("ออโต้ ดาบคู่ [ เบต้า ]", false, function(value)
     Auto_Cursed_Dual_Katana = value
     StopTween(Auto_Cursed_Dual_Katana)
 end)
@@ -5184,7 +5177,6 @@ end)
         end
     end)
 
-if World3 then
 Farm:Toggle("ออโต้ ดาบโยรุ ( ต้องเสกแอดมินก่อน )", false, function(value)
     _G.AutoDarkDagger = value
     StopTween(_G.AutoDarkDagger)
@@ -5237,7 +5229,6 @@ spawn(function()
     end)
 end)
 
-if World3 then
 Farm:Toggle("ออโต้ กดสีฮาคิ", false, function(value)
 	Open_Color_Haki = value
 	StopTween(Open_Color_Haki)
@@ -5269,7 +5260,6 @@ spawn(function()
     end
 end)
 
-if World3 then
 Farm:Toggle("ออโต้ ดาบทูชิตะ", false, function(value)
     _G.AutoHolyTorch = value
     StopTween(_G.AutoHolyTorch)
@@ -5300,7 +5290,6 @@ end)
         end
     end)
 
-if World3 then
 Farm:Toggle("ออโต้ ดาบบัดดี้", false, function(value)
     _G.AutoBudySword = value
     StopTween(_G.AutoBudySword)
@@ -5353,7 +5342,6 @@ spawn(function()
     end
 end)
 
-if World1 then
 Farm:Toggle("ออโต้ โลก 2", false, function(value)
     _G.AutoSecondSea = value
     StopTween(_G.AutoSecondSea)
@@ -5413,7 +5401,6 @@ spawn(function()
     end
 end)
 
-if World2 then
 Farm:Toggle("ออโต้ โลก 3", false, function(value)
     _G.AutoThirdSea = value
     StopTween(_G.AutoThirdSea)
