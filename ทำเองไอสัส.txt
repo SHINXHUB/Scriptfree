@@ -2220,6 +2220,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardRewa
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------Setting Tab
+Set:Seperator("โหมดการฟาร์ม")
 Set:Dropdown("โหมดการฟาร์มเลเวล", {"Quest","No Quest"}, function(value)
     FarmMode = value
 end)
@@ -2236,6 +2237,7 @@ BoneFMode = BoneFMode or "No Quest"
 
 FarmMode = FarmMode or "Quest"
 
+Set:Seperator("เลือกอาวุธในการฟาร์ม")
 Set:Dropdown("เลือกอาวุธ", {"Melee","Sword","Fruit","Gun"}, function(value)
     _G.SelectWeapon = value
 end)
@@ -2280,7 +2282,9 @@ task.spawn(function()
 	end
 end)
 
-Set:Dropdown("โหมดการฟาร์มเลเวล", {"Normal","Extreme (Risk)"}, function(value)
+Set:Seperator("โหมดการโตมตีเลือก")
+
+Set:Dropdown("โหมดตีเร็ว", {"Normal","Extreme (Risk)"}, function(value)
     _G.FastAttack = value
     _G.FastAttackDelay = value
 end)
@@ -3212,6 +3216,8 @@ spawn(function()
     end)
 end)
 
+Set:Seperator("ตีเร็ว 1")
+
     Set:Toggle("ตีเร็ว [ SHIN X HUB ตอนอัพเดทที่ 1 ]", false, function(value)
         UFFF = value
     end)
@@ -3248,15 +3254,17 @@ end)
     end
 end)
 
-Set:Toggle("Fast Attack ",true,function(value)
+Set:Seperator("ตีเร็ว 2")
+
+Set:Toggle("ตีเร็วสัสๆ [ แบบแม่มึงตายเลยบ่นช้านักไอสัส ]",true,function(value)
+        _G.FastAttack2 = value
+    end)   
+
+Set:Toggle("ตีเร็ว [ เปิดละพิมพ์ไม่ได้ ]",true,function(value)
         _G.FastAttack = value
     end) 
   
-Set:Toggle("Fast Attack[2]",true,function(value)
-        _G.FastAttack2 = value
-    end)   
-    
-Set:Toggle("Fast Attack[3]",true,function(value)
+Set:Toggle("ตีเร็ว แบบโครตพ่อโครตแม่มึงเลยไปเหี้ย [ ต้องเปิดอันข้างบนนี้ ↑ ]",true,function(value)
         _G.FastAttack3 = value
     end)   
     
@@ -3328,7 +3336,7 @@ end)
  
     
 
-    Set:Toggle("Remove Attack",true,function(value)
+    Set:Toggle("ลบการโจมตี",true,function(value)
     getgenv().A = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib).wrapAttackAnimationAsync 
 getgenv().B = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle).play
 spawn(function()
@@ -3972,7 +3980,7 @@ task.spawn(function()
 		end)
 	end
 end)
-_G.BringMode = 350
+_G.BringMode = 300
 
 Set:Seperator("FPS")
 
@@ -4017,6 +4025,23 @@ spawn(function()
     end)
 end)
 
+Set:Seperator("ออโต้ สกิวเผ่า")
+
+Set:Toggle("ออโต้ ใช้ สกิวเผ่า V3", false, function(value)
+    _G.V3 = value
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.V3 then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"T",false,game)
+                wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"T",false,game)
+            end
+        end)
+    end
+end)
+
     Set:Toggle("สแปมสกิว เผ่า V4", false, function(value)
         AutoAwakeningRace = value
     end)
@@ -4032,7 +4057,7 @@ end)
 		       end)
            end
        end)
-
+       
 Set:Toggle("ใช้ สกิว Z", true, function(value)
     _G.SkillZ = value
 end)
@@ -6218,6 +6243,7 @@ Farm:Toggle("ออโต้ ดาบโยรุ ( ต้องเสกแอ
     StopTween(_G.AutoDarkDagger)
 end)
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(5089.66455, 311.302582, -3146.12671, -1, 0, 0, 0, 1, 0, 0, 0, -1))
+local AdminPos = CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781)
 spawn(function()
     pcall(function()
         while wait() do
@@ -6378,110 +6404,118 @@ spawn(function()
     end
 end)
 
-Farm:Toggle("ออโต้ โลก 2", false, function(value)
-    _G.AutoSecondSea = value
-    StopTween(_G.AutoSecondSea)
-end)
-spawn(function()
-    while wait() do 
-        if _G.AutoSecondSea then
-            pcall(function()
-                local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
-                if MyLevel >= 700 and World1 then
-                    if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
-                        local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
-                        repeat ATween(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
-                        wait(1.1)
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
-                        wait(0.5)
-                        EquipWeapon("Key")
-                        repeat ATween(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
-                        wait(0.5)
-                    else
-                        if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
-                            if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v.Name == "Ice Admiral" then
-                                        if not v.Humanoid.Health <= 0 then
-                                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                OldCFrameSecond = v.HumanoidRootPart.CFrame
-                                                repeat task.wait()
-                                                    AutoHaki()
-                                                    EquipWeapon(_G.SelectWeapon)
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.Head.CanCollide = false
-                                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                                    v.HumanoidRootPart.CFrame = OldCFrameSecond
-                                                    ATween(v.HumanoidRootPart.CFrame * Pos)
-                                                    game:GetService("VirtualUser"):CaptureController()
-                                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                                    sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                                until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
+    if World2 then
+    
+        Farm:Toggle("ออโต้ โลก 2", false, function(value)
+            _G.AutoSecondSea = value
+            StopTween(_G.AutoSecondSea)
+        end)
+
+        spawn(function()
+            while wait() do 
+                if _G.AutoSecondSea then
+                    pcall(function()
+                        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+                        if MyLevel >= 700 and World1 then
+                            if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+                                local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
+                                repeat topos(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+                                wait(1.1)
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                                wait(0.5)
+                                EquipWeapon("Key")
+                                repeat topos(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+                                wait(0.5)
+                            else
+                                if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+                                    if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
+                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v.Name == "Ice Admiral" then
+                                                if not v.Humanoid.Health <= 0 then
+                                                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                                        OldCFrameSecond = v.HumanoidRootPart.CFrame
+                                                        repeat task.wait()
+                                                            AutoHaki()
+                                                            EquipWeapon(_G.SelectWeapon)
+                                                            v.HumanoidRootPart.CanCollide = false
+                                                            v.Humanoid.WalkSpeed = 0
+                                                            v.Head.CanCollide = false
+                                                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                                            v.HumanoidRootPart.CFrame = OldCFrameSecond
+                                                            topos(v.HumanoidRootPart.CFrame * Pos)
+                                                            game:GetService("VirtualUser"):CaptureController()
+                                                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                                            sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                                        until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
+                                                    end
+                                                else 
+                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                                                end
                                             end
-                                        else 
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                                        end
+                                    else
+                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
+                                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
                                         end
                                     end
                                 end
-                            else
-                                if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
-                                    ATween(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
-                                end
                             end
                         end
-                    end
+                    end)
                 end
-            end)
-        end
+            end
+        end)
     end
-end)
 
-Farm:Toggle("ออโต้ โลก 3", false, function(value)
-    _G.AutoThirdSea = value
-    StopTween(_G.AutoThirdSea)
-end)
-spawn(function()
-    while wait() do
-        if _G.AutoThirdSea then
-            pcall(function()
-                if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and World2 then
-                    _G.AutoFarm = false
-                    if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
-                        ATween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
-                        if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                            wait(1.5)
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
-                        end
-                        wait(1.8)
-                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
-                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "rip_indra" then
-                                    OldCFrameThird = v.HumanoidRootPart.CFrame
-                                    repeat task.wait()
-                                        AutoHaki()
-                                        EquipWeapon(_G.SelectWeapon)
-                                        ATween(v.HumanoidRootPart.CFrame * Pos)
-                                        v.HumanoidRootPart.CFrame = OldCFrameThird
-                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
-                                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                    until _G.AutoThirdSea == false or v.Humanoid.Health <= 0 or not v.Parent
+    if World2 then
+    
+        Farm:Toggle("ออโต้ โลก 3", false, function(value)
+            _G.AutoThirdSea = value
+            StopTween(_G.AutoThirdSea)
+        end)
+
+        spawn(function()
+            while wait() do
+                if _G.AutoThirdSea then
+                    pcall(function()
+                        if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and World2 then
+                            _G.AutoFarm = false
+                            if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
+                                topos(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
+                                if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    wait(1.5)
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+                                end
+                                wait(1.8)
+                                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                        if v.Name == "rip_indra" then
+                                            OldCFrameThird = v.HumanoidRootPart.CFrame
+                                            repeat task.wait()
+                                                AutoHaki()
+                                                EquipWeapon(_G.SelectWeapon)
+                                                topos(v.HumanoidRootPart.CFrame * Pos)
+                                                v.HumanoidRootPart.CFrame = OldCFrameThird
+                                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                game:GetService'VirtualUser':CaptureController()
+                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+                                                sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                            until _G.AutoThirdSea == false or v.Humanoid.Health <= 0 or not v.Parent
+                                        end
+                                    end
+                                elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                                    topos(CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016))
                                 end
                             end
-                        elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
-                            ATween(CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016))
                         end
-                    end
+                    end)
                 end
-            end)
-        end
+            end
+        end)
     end
-end)
 
 Farm:Seperator("บอส / มอน / วัสดุ")
 
